@@ -69,6 +69,7 @@ Use a mapping table:
 
 ```text
 contest_problems
+```
 
 **# Examples Where Separating Tables Improves Design**
 
@@ -124,6 +125,7 @@ A student_id uniquely determines student information.
 
 ```text
 student_id → first_name, last_name, email, batch_id
+```
 
 ---
 
@@ -133,6 +135,7 @@ Each problem_id uniquely identifies its associated problem details.
 
 ```text
 problem_id → title, difficulty, course_id
+```
 
 ---
 
