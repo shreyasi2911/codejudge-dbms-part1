@@ -69,3 +69,148 @@ Use a mapping table:
 
 ```text
 contest_problems
+
+---
+
+**# Examples Where Separating Tables Improves Design**
+
+**## Example 1- Test Results Separation**
+
+Initially, test case execution results could have been stored directly inside submissions.
+
+**### Problem**
+
+One submission may contain multiple test case outputs, leading to repeating groups.
+
+**### Solution**
+
+A separate test_results table was created.
+
+Benefits:
+
+supports multiple test cases per submission
+avoids repeating columns
+improves scalability
+
+---
+
+**## Example 2- Attendance Separation**
+
+Attendance data could have been merged into sessions or students.
+
+**### Problem**
+
+A session contains attendance for many students.
+
+**### Solution**
+
+Separate attendance table created with:
+
+student_id
+session_id
+attendance_status
+
+Benefits:
+
+handles many-to-many relationship properly
+avoids NULL-heavy structures
+improves reporting flexibility
+
+---
+
+**# Functional Dependency Examples**
+
+**## Functional Dependency 1**
+
+A student_id uniquely determines student information.
+
+```text
+student_id → first_name, last_name, email, batch_id
+
+---
+
+**## Functional Dependancy 2**
+
+Each problem_id uniquely identifies its associated problem details.
+
+```text
+problem_id → title, difficulty, course_id
+
+---
+
+**# First Normal Form (1NF)**
+
+The final schema satisfies 1NF because:
+
+all columns contain atomic values
+no repeating groups exist
+each row is uniquely identifiable
+each table has a primary key
+
+**## Example:**
+
+Instead of storing multiple test results in one column, each result is stored as a separate row.
+
+---
+
+**# Second Normal Form (2NF)**
+
+The schema satisfies 2NF because:
+
+all non-key attributes fully depend on the primary key
+many-to-many relationships are separated using bridge tables
+partial dependencies are removed
+
+**## Example:**
+
+In contest_problems, contest and problem relationships are isolated into a dedicated table.
+
+---
+
+**# Third Normal Form (3NF)**
+
+The schema approximately satisfies 3NF because:
+
+transitive dependencies are minimized
+non-key attributes depend only on the primary key
+entity-specific information is isolated into separate tables
+
+**## Example:**
+
+Batch information is stored only in batches instead of repeatedly inside students.
+
+---
+
+
+**# Trade-offs in the Design**
+
+**## Advantage — Reduced Redundancy**
+
+Normalization minimizes duplicate data and improves consistency.
+
+---
+
+**## Advantage — Better Data Integrity**
+
+Foreign keys and constraints help prevent invalid relationships.
+
+---
+
+**## Trade-off — Increased Number of Tables**
+
+More normalized tables require additional JOIN operations during querying.
+
+This can slightly increase query complexity.
+
+---
+
+**## Trade-off — Slightly Higher Query Complexity**
+
+Reports combining:
+
+students
+submissions
+problems
+contests
+
+may require multiple joins.
