@@ -69,5 +69,3 @@ Use a mapping table:
 
 ```text
 contest_problems
-
-**# Examples where separating tables improves design **
