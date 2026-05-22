@@ -55,6 +55,21 @@ Create a separate `problems` table and reference it through `problem_id`.
 
 ---
 
+## Example 3 — Contest and Problem Redundancy
+
+A contest may contain multiple problems and one problem may appear in multiple contests.
+
+### Problem
+
+Storing contest and problem details together repeatedly creates duplicate rows.
+
+### Solution
+
+Use a mapping table:
+
+```text
+contest_problems
+
 **# Examples Where Separating Tables Improves Design**
 
 **## Example 1- Test Results Separation**
